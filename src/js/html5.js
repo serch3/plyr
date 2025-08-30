@@ -53,6 +53,9 @@ const html5 = {
     // Set speed options from config
     player.options.speed = player.config.speed.options;
 
+    // Set loop options from config
+    player.options.loop = player.config.loop.options;
+
     // Set aspect ratio if fixed
     if (!is.empty(this.config.ratio)) {
       setAspectRatio.call(player);

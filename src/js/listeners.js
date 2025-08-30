@@ -433,6 +433,15 @@ class Listeners {
       player.storage.set({ speed: player.speed });
     });
 
+    // Loop change
+    on.call(player, player.media, 'loopchange', () => {
+      // Update UI
+      controls.updateSetting.call(player, 'loop');
+
+      // Save to storage
+      player.storage.set({ loop: player.loop });
+    });
+
     // Quality change
     on.call(player, player.media, 'qualitychange', (event) => {
       // Update UI

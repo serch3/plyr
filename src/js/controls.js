@@ -533,6 +533,10 @@ const controls = {
             this.speed = Number.parseFloat(value);
             break;
 
+          case 'loop':
+            this.loop = value;
+            break;
+
           default:
             break;
         }
@@ -903,6 +907,9 @@ const controls = {
       case 'captions':
         return captions.getLabel.call(this);
 
+      case 'loop':
+        return value ? i18n.get('enabled', this.config) : i18n.get('disabled', this.config);
+
       default:
         return null;
     }
@@ -969,48 +976,42 @@ const controls = {
   },
 
   // Set the looping options
-  /* setLoopMenu() {
-        // Menu required
-        if (!is.element(this.elements.settings.panels.loop)) {
-            return;
-        }
+  setLoopMenu() {
+    // Menu required
+    if (!is.element(this.elements.settings.panels.loop)) {
+      return;
+    }
 
-        const options = ['start', 'end', 'all', 'reset'];
-        const list = this.elements.settings.panels.loop.querySelector('[role="menu"]');
+    const type = 'loop';
+    const list = this.elements.settings.panels.loop.querySelector('[role="menu"]');
 
-        // Show the pane and tab
-        toggleHidden(this.elements.settings.buttons.loop, false);
-        toggleHidden(this.elements.settings.panels.loop, false);
+    // Toggle the pane and tab
+    const toggle = !is.empty(this.options.loop);
+    controls.toggleMenuButton.call(this, type, toggle);
 
-        // Toggle the pane and tab
-        const toggle = !is.empty(this.loop.options);
-        controls.toggleMenuButton.call(this, 'loop', toggle);
+    // Empty the menu
+    emptyElement(list);
 
-        // Empty the menu
-        emptyElement(list);
+    // Check if we need to toggle the parent
+    controls.checkMenu.call(this);
 
-        options.forEach(option => {
-            const item = createElement('li');
+    // If we're hiding, nothing more to do
+    if (!toggle) {
+      return;
+    }
 
-            const button = createElement(
-                'button',
-                extend(getAttributesFromSelector(this.config.selectors.buttons.loop), {
-                    type: 'button',
-                    class: this.config.classNames.control,
-                    'data-plyr-loop-action': option,
-                }),
-                i18n.get(option, this.config)
-            );
+    // Create items
+    this.options.loop.forEach((option) => {
+      controls.createMenuItem.call(this, {
+        value: option,
+        list,
+        type,
+        title: controls.getLabel.call(this, 'loop', option),
+      });
+    });
 
-            if (['start', 'end'].includes(option)) {
-                const badge = controls.createBadge.call(this, '00:00');
-                button.appendChild(badge);
-            }
-
-            item.appendChild(button);
-            list.appendChild(item);
-        });
-    }, */
+    controls.updateSetting.call(this, type, list);
+  },
 
   // Get current selected caption language
   // TODO: rework this to user the getter in the API?
@@ -1287,6 +1288,7 @@ const controls = {
       createTime,
       setQualityMenu,
       setSpeedMenu,
+      setLoopMenu,
       showMenuPanel,
     } = controls;
     this.elements.controls = null;
@@ -1629,6 +1631,8 @@ const controls = {
 
     setSpeedMenu.call(this);
 
+    setLoopMenu.call(this);
+
     return container;
   },
 
@@ -1681,8 +1685,7 @@ const controls = {
         speed: this.speed,
         quality: this.quality,
         captions: captions.getLabel.call(this),
-        // TODO: Looping
-        // loop: 'None',
+        loop: this.loop,
       });
       update = false;
     }

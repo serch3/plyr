@@ -111,6 +111,7 @@ class Plyr {
     this.options = {
       speed: [],
       quality: [],
+      loop: [],
     };
 
     // Debugging
@@ -786,6 +787,9 @@ class Plyr {
     const toggle = is.boolean(input) ? input : this.config.loop.active;
     this.config.loop.active = toggle;
     this.media.loop = toggle;
+
+    // Trigger loopchange event
+    triggerEvent.call(this, this.media, 'loopchange');
 
     // Set default to be a true toggle
     /* const type = ['start', 'end', 'all', 'none', 'toggle'].includes(input) ? input : 'toggle';
