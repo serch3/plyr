@@ -17,6 +17,15 @@
   .plyr__progress__container {
     flex: 1;
     min-width: 0; // Fix for Edge issue where content would overflow
+    left: 10px;
+    position: absolute;
+    top: 14px;
+    width: calc(100% - 30px);
+  }
+  @media (max-width: 480px) {
+    .plyr__progress__container {
+      top: -5px;
+    }
   }
 
   // Spacing
