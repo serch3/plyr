@@ -77,6 +77,7 @@ const defaults = {
   // Set loops
   loop: {
     active: false,
+    options: [false, true],
     // start: null,
     // end: null,
   },
@@ -144,7 +145,7 @@ const defaults = {
     // 'download',
     'fullscreen',
   ],
-  settings: ['captions', 'quality', 'speed'],
+  settings: ['captions', 'quality', 'speed', 'loop'],
 
   // Localisation
   i18n: {
@@ -273,6 +274,9 @@ const defaults = {
     // Quality
     'qualitychange',
 
+    // loop
+    'loopchange',
+
     // Ads
     'adsloaded',
     'adscontentpause',
@@ -316,12 +320,13 @@ const defaults = {
       speed: '[data-plyr="speed"]',
       language: '[data-plyr="language"]',
       quality: '[data-plyr="quality"]',
+      loop: '[data-plyr="loop"]',
     },
     display: {
       currentTime: '.plyr__time--current',
       duration: '.plyr__time--duration',
       buffer: '.plyr__progress__buffer',
-      loop: '.plyr__progress__loop', // Used later
+      // loop: '.plyr__progress__loop', // Used later
       volume: '.plyr__volume--display',
     },
     progress: '.plyr__progress',
