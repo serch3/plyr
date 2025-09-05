@@ -4,7 +4,7 @@
 
 // Thumb
 $plyr-range-thumb-height: var(--plyr-range-thumb-height, 10px) !default;
-$plyr-range-thumb-background: var(--plyr-range-thumb-background, #fff) !default;
+$plyr-range-thumb-background: var(--plyr-range-thumb-background, $plyr-color-main) !default;
 $plyr-range-thumb-shadow: var(
   --plyr-range-thumb-shadow,
   0 1px 1px rgba($plyr-color-gray-900, 0.15),
@@ -15,7 +15,7 @@ $plyr-range-thumb-shadow: var(
 $plyr-range-thumb-active-shadow-width: var(--plyr-range-thumb-active-shadow-width, 3px) !default;
 
 // Track
-$plyr-range-track-height: var(--plyr-range-track-height, 5px) !default;
+$plyr-range-track-height: var(--plyr-range-track-height, 3px) !default;
 
 // Fill
 $plyr-range-fill-background: var(--plyr-range-fill-background, var(--plyr-color-main, $plyr-color-main)) !default;
