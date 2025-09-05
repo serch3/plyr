@@ -5,6 +5,7 @@
 .plyr--full-ui input[type='range'] {
   appearance: none;
   background: transparent;
+  cursor: pointer;
   border: 0;
   border-radius: calc(#{$plyr-range-thumb-height} * 2);
 
